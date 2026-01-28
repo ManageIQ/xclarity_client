@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["mrao@lenovo.com","rbrown4@lenovo.com"]
 
   spec.summary       = %q{Lenovo XClarity API Client}
-  spec.homepage      = "https://github.com/lenovo/xclarity_client"
+  spec.homepage      = "https://github.com/ManageIQ/xclarity_client"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
