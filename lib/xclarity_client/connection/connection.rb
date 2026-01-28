@@ -1,4 +1,6 @@
 require 'faraday'
+require 'faraday/httpclient'
+require 'faraday/multipart'
 require 'faraday-cookie_jar'
 require 'uri'
 require 'uri/https'
@@ -126,7 +128,7 @@ module XClarityClient
       basic_auth = configuration.auth_type == 'basic_auth'
       username = configuration.username
       password = configuration.password
-      connection.basic_auth(username, password) if basic_auth
+      connection.request(:authorization, :basic, username, password) if basic_auth
       $lxca_log.info(header, 'Connection created Successfuly')
       connection
     end
