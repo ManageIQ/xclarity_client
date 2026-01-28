@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency             "faraday-httpclient", "~> 2.0"
   spec.add_dependency             "faraday-multipart", "~> 1.2"
   spec.add_dependency             "faraday-cookie_jar", "~> 0.0.6"
-  spec.add_dependency             "httpclient", "~>2.8.3"
+  spec.add_dependency             "httpclient", "~> 2.8"
   spec.add_dependency             "uuid", "~> 2.3.8"
   spec.add_dependency             "json-schema", "~> 2.8.0"
 end
