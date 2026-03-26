@@ -14,7 +14,7 @@ module XClarityClient
       if [uuid, requested_state].any? { |item| item.nil? }
         error = 'Invalid target or power state requested'
         source = 'XClarity::NodeManagement set_bmc_power_state'
-        $lxca_log.info source, error
+        XClarityClient.logger.info("[#{source}] - #{error}")
         raise ArgumentError, error
       end
 

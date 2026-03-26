@@ -14,7 +14,7 @@ module XClarityClient
       )
 
       unless con.success?
-        $lxca_log.error "XClarityClient::RemoteAccessManagement remote_control", "Request failed"
+        XClarityClient.logger.error("[XClarityClient::RemoteAccessManagement remote_control] - Request failed")
         raise 'Request failed'
       end
 
@@ -33,9 +33,8 @@ module XClarityClient
       when /application\/x-java-jnlp-file/
         build_jnlp_remote_access_object(connection.body)
       else
-        $lxca_log.error(
-          "XClarityClient::RemoteAccessManagement build_remote_access_object",
-          "Unexpected server response. Expected Content-Type header to be one of these: #{SUPPORTED_MIME_TYPES}."
+        XClarityClient.logger.error(
+          "[XClarityClient::RemoteAccessManagement build_remote_access_object] - Unexpected server response. Expected Content-Type header to be one of these: #{SUPPORTED_MIME_TYPES}."
         )
         raise 'Unexpected Content-Type header'
       end

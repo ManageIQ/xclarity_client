@@ -39,7 +39,7 @@ module XClarityClient
       base_url = ManagementServer::BASE_URI
       url = key.nil? ? base_url : "#{base_url}?key=#{key}"
       msg = "input key=#{key}"
-      $lxca_log.info(self.class.to_s + ' ' + __method__.to_s, msg)
+      XClarityClient.logger.info("[#{self.class} #{__method__}] - #{msg}")
       @connection.do_get(url)
     end
 
@@ -59,7 +59,7 @@ module XClarityClient
       request_body = JSON.generate(:files => payload_files)
       response = @connection.do_post(url, request_body)
       jobid = JSON.parse(response.body)['jobid']
-      $lxca_log.info(self.class.to_s + ' ' + __method__.to_s, "jobid: #{jobid}")
+      XClarityClient.logger.info("[#{self.class} #{__method__}] - jobid: #{jobid}")
       start_management_server_updates_import_job(file_type_dict, files, jobid)
     end
 

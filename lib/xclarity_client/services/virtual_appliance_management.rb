@@ -22,7 +22,7 @@ module XClarityClient
 
     def ip_enablement_state
       uri = BASE_URI+NETWORK_URI+IPDISABLE_URI
-      $lxca_log.info "XclarityClient::VirtualApplianceManagement ip_enablement_state", "Action has been sent to #{uri}"
+      XClarityClient.logger.info("[XclarityClient::VirtualApplianceManagement ip_enablement_state] - Action has been sent to #{uri}")
 
       @connection.do_get(uri)
     end
@@ -33,7 +33,7 @@ module XClarityClient
 
     def host_settings
       uri = BASE_URI+NETWORK_URI+IPDISABLE_URI
-      $lxca_log.info "XclarityClient::VirtualApplianceManagement host_settings", "Action has been sent to #{uri}"
+      XClarityClient.logger.info("[XclarityClient::VirtualApplianceManagement host_settings] - Action has been sent to #{uri}")
 
       @connection.do_get(uri)
     end
@@ -44,7 +44,7 @@ module XClarityClient
 
     def network_interface_settings(interface)
       uri = BASE_URI+NETWORK_URI+INTERFACES_URI+"/#{interface}"
-      $lxca_log.info "XclarityClient::VirtualApplianceManagement network_interface_settings", "Action has been sent to #{uri}"
+      XClarityClient.logger.info("[XclarityClient::VirtualApplianceManagement network_interface_settings] - Action has been sent to #{uri}")
 
       @connection.do_get(uri)
     end
@@ -55,7 +55,7 @@ module XClarityClient
 
     def route_settings
       uri = BASE_URI+NETWORK_URI+ROUTES_URI
-      $lxca_log.info "XclarityClient::VirtualApplianceManagement route_settings", "Action has been sent to #{uri}"
+      XClarityClient.logger.info("[XclarityClient::VirtualApplianceManagement route_settings] - Action has been sent to #{uri}")
 
       @connection.do_get(uri)
     end
@@ -66,7 +66,7 @@ module XClarityClient
 
     def subscriptions
       uri = BASE_URI+SUBSCRIPTIONS_URI
-      $lxca_log.info "XclarityClient::VirtualApplianceManagement subscriptions", "Action has been sent to #{uri}"
+      XClarityClient.logger.info("[XclarityClient::VirtualApplianceManagement subscriptions] - Action has been sent to #{uri}")
 
       @connection.do_get(uri)
     end

@@ -22,7 +22,7 @@ module XClarityClient
         unless valid_arguments?(uuid, state, managed_resource::POWER_ACTIONS)
           error = 'Invalid target or power state requested'
           source = "#{self.class.name} set_power_state"
-          $lxca_log.info(source, error)
+          XClarityClient.logger.info("[#{source}] - #{error}")
           raise ArgumentError, error
         end
 
@@ -45,7 +45,7 @@ module XClarityClient
         unless valid_arguments?(uuid, state, managed_resource::LED_STATES)
           error = 'Invalid target or power state requested'
           source = "#{self.class.name} set_loc_led_state"
-          $lxca_log.info(source, error)
+          XClarityClient.logger.info("[#{source}] - #{error}")
           raise ArgumentError, error
         end
 
@@ -68,7 +68,7 @@ module XClarityClient
         response = @connection.do_put(uri, power_request)
         msg = "Power state action has been sent with request #{power_request}"
 
-        $lxca_log.info("#{self.class.name} send_power_request", msg)
+        XClarityClient.logger.info("[#{self.class.name} send_power_request] - #{msg}")
         response
       end
 
@@ -93,7 +93,7 @@ module XClarityClient
         response = @connection.do_put(uri, request)
         msg = "LED state request has been sent with request #{request}"
 
-        $lxca_log.info("#{self.class.name} send_led_state_request", msg)
+        XClarityClient.logger.info("[#{self.class.name} send_led_state_request] - #{msg}")
         response
       end
 

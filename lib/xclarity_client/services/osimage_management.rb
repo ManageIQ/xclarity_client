@@ -7,7 +7,7 @@ module XClarityClient
 
     def import_osimage(server_id, path)
       msg="inputs serverId=#{server_id},path=#{path}"
-      $lxca_log.info self.class.to_s+" "+__method__.to_s, msg
+      XClarityClient.logger.info("[#{self.class} #{__method__}] - #{msg}")
       opts = { :Action => "Init" }
       request_body = JSON.generate(opts)
       response = @connection.do_post("#{OsImage::BASE_URI}?imageType=OS",
