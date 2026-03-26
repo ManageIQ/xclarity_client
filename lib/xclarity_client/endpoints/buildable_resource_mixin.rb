@@ -41,9 +41,8 @@ module XClarityClient
         send("#{key}=", value)
       rescue
         unless defined?(Rails).nil?
-          $lxca_log.info(
-            'XClarityClient::Endpoints::BuildableResourceMixin',
-            "UNEXISTING ATTRIBUTES FOR #{self.class}: #{key}"
+          XClarityClient.logger.info(
+            "[XClarityClient::Endpoints::BuildableResourceMixin] - UNEXISTING ATTRIBUTES FOR #{self.class}: #{key}"
           )
         end
       end

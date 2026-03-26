@@ -13,7 +13,7 @@ module XClarityClient
       validate_port
       validate_timeout
 
-      $lxca_log.info(HEADER_MESSAGE, 'Configuration built successfully')
+      XClarityClient.logger.info("[#{HEADER_MESSAGE}] - Configuration built successfully")
     end
 
     def validate_port
@@ -60,7 +60,7 @@ module XClarityClient
     end
 
     def raise_exception(message)
-      $lxca_log.error(HEADER_MESSAGE, message)
+      XClarityClient.logger.error("[#{HEADER_MESSAGE}] - #{message}")
       raise(ArgumentError, message)
     end
   end

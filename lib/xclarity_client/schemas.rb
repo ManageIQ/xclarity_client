@@ -171,10 +171,10 @@ module XClarityClient
       x = JSON::Validator.fully_validate(self::REQ_SCHEMA[schema_name], data)
       unless x.empty?
         errmsg = "input validation failed for data #{data}"
-        $lxca_log.error('XClarityClient::Schemas validate_input', errmsg.to_s)
+        XClarityClient.logger.error("[XClarityClient::Schemas validate_input] - #{errmsg}")
         g = ''
         x.each do |k|
-          $lxca_log.error('XClarityClient::Schemas validate_input', k)
+          XClarityClient.logger.error("[XClarityClient::Schemas validate_input] - #{k}")
           g << "#{k},  "
         end; return { :result => 'Input validation failed', :message => g }
       end; return { :result => 'success' }

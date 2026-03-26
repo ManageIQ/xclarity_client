@@ -50,7 +50,7 @@ module XClarityClient
     rescue Faraday::ConnectionFailed, Timeout::Error => e
       msg = "Error trying to send a GET to #{uri + url_query} "\
             "the reason: #{e.message}"
-      $lxca_log.error(HEADER_MESSAGE + ' do_get', msg)
+      XClarityClient.logger.error("[#{HEADER_MESSAGE} do_get] - #{msg}")
       Faraday::Response.new
     end
 
@@ -115,8 +115,8 @@ module XClarityClient
       header = HEADER_MESSAGE + " do_#{method}"
       msg = "Error trying to send a #{method} to #{url} " \
             "the reason: #{e.message}"
-      $lxca_log.error(header, msg)
-      $lxca_log.error(header, "Request sent: #{body}")
+      XClarityClient.logger.error("[#{header}] - #{msg}")
+      XClarityClient.logger.error("[#{header}] - Request sent: #{body}")
       Faraday::Response.new
     end
 
@@ -129,7 +129,7 @@ module XClarityClient
       username = configuration.username
       password = configuration.password
       connection.request(:authorization, :basic, username, password) if basic_auth
-      $lxca_log.info(header, 'Connection created Successfuly')
+      XClarityClient.logger.info("[#{header}] - Connection created Successfuly")
       connection
     end
 
@@ -137,7 +137,7 @@ module XClarityClient
       Faraday.new(url: url) do |faraday|
         faraday.request(:multipart) if multipart # multipart form data
         faraday.request(:url_encoded) # form-encode POST params
-        faraday.response(:logger, $lxca_log.log) # log requests to log file
+        faraday.response(:logger, XClarityClient.logger) # log requests to log file
         faraday.use(:cookie_jar) if configuration.auth_type == 'token'
         faraday.adapter(:httpclient) unless n_http || multipart
         faraday.adapter(:net_http) if n_http || multipart # with net_http
@@ -152,14 +152,14 @@ module XClarityClient
 
     def build(configuration, multipart = false, n_http = false)
       header = HEADER_MESSAGE + ' build'
-      $lxca_log.info(header, 'Building the connection')
+      XClarityClient.logger.info("[#{header}] - Building the connection")
       hostname = URI.parse(configuration.host)
       host = hostname.scheme ? hostname.host : hostname.path
       url = URI::HTTPS.build(:host     => host,
                              :port     => configuration.port.to_i,
                              :query    => hostname.query,
                              :fragment => hostname.fragment).to_s
-      $lxca_log.info(header, "Creating connection to #{url}")
+      XClarityClient.logger.info("[#{header}] - Creating connection to #{url}")
       build_connection(url, configuration, multipart, n_http)
     end
   end

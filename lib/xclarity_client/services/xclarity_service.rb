@@ -21,20 +21,17 @@ module XClarityClient
       def fetch_all(opts = {}, uri = {})
         uri = managed_resource::BASE_URI if uri.empty? || uri.nil?
 
-        $lxca_log.info "XclarityClient::Endpoints::XClarityService fetch_all",
-                       "Sending request to #{managed_resource} resource"
+        XClarityClient.logger.info("[XclarityClient::Endpoints::XClarityService fetch_all] - Sending request to #{managed_resource} resource")
 
         response = @connection.do_get(uri, :query => opts)
 
-        $lxca_log.info("XclarityClient::Endpoints::XClarityService fetch_all",
-                       "Response received from #{uri}")
+        XClarityClient.logger.info("[XclarityClient::Endpoints::XClarityService fetch_all] - Response received from #{uri}")
 
         build_response_with_resource_list(response, managed_resource)
       end
 
       def get_object(uuids, includeAttributes, excludeAttributes)
-        $lxca_log.info "XclarityClient::Endpoints::XClarityService get_object",
-                       "Sending request to #{managed_resource} resource"
+        XClarityClient.logger.info("[XclarityClient::Endpoints::XClarityService get_object] - Sending request to #{managed_resource} resource")
 
         uuid_array = uuids&.reject { |uuid| uuid.nil? || uuid.empty? }
 
@@ -92,8 +89,7 @@ module XClarityClient
       end
 
       def get_object_with_include_attributes(uuids, attributes)
-        $lxca_log.info "XclarityClient::ManagementMixin get_object_with_include",
-                       "Sending request to #{managed_resource} resource including the following attributes: #{attributes.join(",")}"
+        XClarityClient.logger.info("[XclarityClient::ManagementMixin get_object_with_include] - Sending request to #{managed_resource} resource including the following attributes: #{attributes.join(",")}")
 
         response = if not uuids.nil?
           @connection.do_get(managed_resource::BASE_URI + "/" + uuids.join(",") + "?includeAttributes=" + attributes.join(","))
@@ -104,8 +100,7 @@ module XClarityClient
       end
 
       def get_object_with_exclude_attributes(uuids, attributes)
-        $lxca_log.info "XclarityClient::ManagementMixin get_object_with_include",
-                       "Sending request to #{managed_resource} resource excluding the following attributes: #{attributes.join(",")}"
+        XClarityClient.logger.info("[XclarityClient::ManagementMixin get_object_with_include] - Sending request to #{managed_resource} resource excluding the following attributes: #{attributes.join(",")}")
 
         response = if not uuids.nil?
           @connection.do_get(managed_resource::BASE_URI + "/#{uuids.join(",")}"+"?excludeAttributes=#{attributes.join(",")}")

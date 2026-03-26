@@ -10,11 +10,11 @@ module XClarityClient
     end
 
     def validate
-      $lxca_log.info 'XClarityClient::XClarityValidate validate', 'Creating session ...'
+      XClarityClient.logger.info('[XClarityClient::XClarityValidate validate] - Creating session ...')
       build_session(@configuration)
 
       id_session = JSON.parse(@response.body)['messages'].first['id']
-      $lxca_log.info 'XClarityClient::XClarityValidate validate', 'Session created ...'
+      XClarityClient.logger.info('[XClarityClient::XClarityValidate validate] - Session created ...')
 
       close_session(id_session)
     rescue => err
