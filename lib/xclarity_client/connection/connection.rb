@@ -47,7 +47,7 @@ module XClarityClient
           headers.map { |key, value| req.headers[key] = value }
         end
       end
-    rescue Faraday::Error::ConnectionFailed, Timeout::Error => e
+    rescue Faraday::ConnectionFailed, Timeout::Error => e
       msg = "Error trying to send a GET to #{uri + url_query} "\
             "the reason: #{e.message}"
       $lxca_log.error(HEADER_MESSAGE + ' do_get', msg)
@@ -111,7 +111,7 @@ module XClarityClient
         request.headers['Content-Type'] = 'application/json' unless multipart
         request.body = body
       end
-    rescue Faraday::Error::ConnectionFailed => e
+    rescue Faraday::ConnectionFailed => e
       header = HEADER_MESSAGE + " do_#{method}"
       msg = "Error trying to send a #{method} to #{url} " \
             "the reason: #{e.message}"
