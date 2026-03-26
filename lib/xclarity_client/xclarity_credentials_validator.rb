@@ -38,7 +38,7 @@ module XClarityClient
         :password => conf.password
       }.to_json)
 
-      raise Faraday::Error::ConnectionFailed unless @response.success?
+      raise Faraday::ConnectionFailed unless @response.success?
     end
 
     def close_session(id_session)
